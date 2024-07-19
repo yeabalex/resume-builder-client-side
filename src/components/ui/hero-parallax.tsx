@@ -108,7 +108,7 @@ export const Header = () => {
   return (
     <div className="max-w-7xl relative mx-auto py-20 md:py-5 px-4 w-full  left-0 top-0">
       <h1 className="text-5xl md:text-7xl font-bold text-white">
-        Your Ultimate <br /> Tool for Resume/CV. <br/> <FlipWords className='bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text h-[80px]' words={words}/>
+        Your Ultimate <br /> Tool for Resume/CV. <br/> <FlipWords className='bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text h-[80px] text-white' words={words}/>
       </h1>
       <p className="max-w-2xl text-lg md:text-lg mt-8 text-neutral-200">
       With no effort on your part, we let you build beautiful resumes with the most attractive designs and templates. Elevate your professional presence and impress employers with ease!
