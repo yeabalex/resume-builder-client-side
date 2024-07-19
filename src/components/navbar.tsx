@@ -71,7 +71,7 @@ function Navbar({ className }: { className?: string }) {
           </div>
         </MenuItem>
       </Menu>
-      <div className="flex space-x-5"> 
+      <div className="flex space-x-5 text-white"> 
         <div>Login</div>
         <div>Sign Up</div>
       </div> 
