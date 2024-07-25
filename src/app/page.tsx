@@ -1,9 +1,15 @@
 "use client";
 import React from "react";
 import { HeroParallax } from "@/components/ui/hero-parallax";
-import { products } from "@/constants/products";
-
+import { StickyScrollRevealDemo } from "@/components/sticky-content";
+import Footer from "@/components/footer";
 
 export default function HeroParallaxDemo() {
-  return <HeroParallax products={products} />;
+  return (
+<>  
+  <HeroParallax />
+  <StickyScrollRevealDemo/>
+  <Footer/>
+</>
+);
 }
