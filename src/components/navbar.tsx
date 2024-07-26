@@ -8,6 +8,7 @@ import NavbarMobile from "./ui/navbar-mobile";
 import Logo from '@/../public/kraft.png'
 import Image from "next/image";
 import Link from "next/link";
+import { url } from "inspector";
 
 export default function NavbarDemo() {
   return (
@@ -121,7 +122,7 @@ function Navbar({ className }: { className?: string }) {
         className={cn("fixed top-2 inset-x-0 max-w-[90%] mx-auto z-50 flex justify-around items-center rounded-full", className)}
       >
       <BackgroundGradient containerClassName="w-full rounded-full" className={`${scrolled?"bg-black bg-opacity-80":null} transition duration-700`}>
-          <NavbarMobile/>
+          <NavbarMobile image={Logo}/>
       </BackgroundGradient>
       </div>
       )

@@ -21,7 +21,6 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"
-import axios from 'axios'
 
 
 
@@ -133,7 +132,7 @@ export function SignUp() {
                 <Label htmlFor="password" className="text-white">Password</Label>
                 <Button
                   hidden
-                  className="w-0 h-0 absolute top-[60%] right-2"
+                  className="w-0 h-0 absolute top-[40px] right-2 z-50"
                   onClick={togglePassword}
                   variant="secondary"
                 >

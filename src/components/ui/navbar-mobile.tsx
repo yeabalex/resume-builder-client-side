@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faHome, faUser, faCog } from '@fortawesome/free-solid-svg-icons';
 import { Button } from './button';
-
-const NavbarMobile = () => {
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
+import Image from 'next/image';
+import Link from 'next/link'
+const NavbarMobile = (params : Params) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -13,7 +15,7 @@ const NavbarMobile = () => {
   return (
     <nav className={`p-4 w-full`}>
       <div className="flex items-center justify-between">
-        <p className="text-white font-bold">CVMeister</p>
+          <Image src={params.image} alt='' width={85} height={85}/>
         <div className="lg:hidden">
           <button onClick={toggleMenu}>
             <FontAwesomeIcon icon={isOpen ? faTimes : faBars} className="text-white text-2xl" />
@@ -33,7 +35,7 @@ const NavbarMobile = () => {
         <div className='flex space-x-5'>
         <Button variant="outline" className='text-white' >Log in</Button>
     
-        <Button variant="secondary">Sign up</Button>
+        <Button variant="secondary"><Link href='/sign-up' >Sign up</Link></Button>
         
         </div>
       </div>
