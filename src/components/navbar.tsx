@@ -5,6 +5,9 @@ import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { BackgroundGradient } from "./ui/background-gradient";
 import NavbarMobile from "./ui/navbar-mobile";
+import Logo from '@/../public/kraft.png'
+import Image from "next/image";
+import Link from "next/link";
 
 export default function NavbarDemo() {
   return (
@@ -63,13 +66,13 @@ function Navbar({ className }: { className?: string }) {
       <div
       className={cn("fixed mx-[10%] top-2 inset-x-0 z-50 flex justify-around items-center rounded-full", className)}
     >
-      <BackgroundGradient containerClassName="w-full rounded-full" className={`rounded-full ${scrolled?"bg-black bg-opacity-80":null} transition duration-700`}>
-        <div className="flex items-center justify-around">
+      <BackgroundGradient containerClassName="w-full rounded-full" className={`rounded-full ${scrolled?"bg-black bg-opacity-70":null} transition duration-700`}>
+        <div className="flex items-center justify-around space-x-8">
       <div>    
-        <p className="text-white font-bold">CVMeister</p>
+        <Image src={Logo} alt="logo" width={85} height={85} className="bg-blend-darken"/>
       </div>
       <Menu setActive={setActive}>
-        <div className="text-white">Home</div>
+        <div className="text-white"><Link href='/'>Home</Link></div>
         <MenuItem setActive={setActive} active={active} item="About">
           <div className="flex flex-col space-y-4 text-sm">
             <HoveredLink href="/web-dev">What we do</HoveredLink>
@@ -106,7 +109,7 @@ function Navbar({ className }: { className?: string }) {
       </Menu>
       <div className="flex space-x-5 text-white"> 
         <Button variant="outline">Login</Button>
-        <Button variant="secondary">Sign Up</Button>
+        <Button variant="secondary"><Link href='/sign-up'>Sign Up</Link></Button>
       </div> 
       </div>
       </BackgroundGradient>

@@ -84,6 +84,6 @@ body::before {
   height: 100%;
   background-image: url('/grid/SL-072622-51930-14.jpg');
   background-size: contain;
-  opacity: 0.2;
+  opacity: 0.15;
   z-index: -1; /* Ensure the background is behind other content */
 }

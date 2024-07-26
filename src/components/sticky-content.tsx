@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
-import Image from "next/image";
+
 
 const content = [
   {
@@ -9,8 +9,8 @@ const content = [
     description:
       "Click the Sign-Up button, fill in your details, boom your account is created. Then, check your email for a confirmation code, fill it, and you're all set to explore and enjoy my service!",
     content: (
-      <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] flex items-center justify-center text-white">
-        Collaborative Editing
+      <div className="h-full w-full flex items-center justify-center text-white">
+
       </div>
     ),
   },
@@ -20,13 +20,7 @@ const content = [
       "Fill in your information in the forms provided. Once completed, click Done to finalize your personal profile and get started! Your information is only used to create your resume.",
     content: (
       <div className="h-full w-full  flex items-center justify-center text-white">
-        <Image
-          src="/linear.webp"
-          width={300}
-          height={300}
-          className="h-full w-full object-cover"
-          alt="linear board demo"
-        />
+ 
       </div>
     ),
   },
@@ -54,7 +48,7 @@ const content = [
 export function StickyScrollRevealDemo() {
   return (
     <div className="h-[100vh]">
-      <StickyScroll content={content} contentClassName="w-[60%] h-[85%]" />
+      <StickyScroll content={content} contentClassName="w-[60%] h-[80%]" />
     </div>
   );
 }
