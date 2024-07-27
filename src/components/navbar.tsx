@@ -9,6 +9,7 @@ import Logo from '@/../public/kraft.png'
 import Image from "next/image";
 import Link from "next/link";
 import { url } from "inspector";
+import { usePathname } from "next/navigation";
 
 export default function NavbarDemo() {
   return (
@@ -24,7 +25,7 @@ function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState<Boolean>()
-
+  const path = usePathname()
 
   useEffect(()=>{
     const handleResize = () => {
@@ -61,13 +62,12 @@ function Navbar({ className }: { className?: string }) {
     };
   }, []); 
 
-  
     if(!isSmallScreen){
       return(
       <div
       className={cn("fixed mx-[10%] top-2 inset-x-0 z-50 flex justify-around items-center rounded-full", className)}
     >
-      <BackgroundGradient containerClassName="w-full rounded-full" className={`rounded-full ${scrolled?"bg-black bg-opacity-70":null} transition duration-700`}>
+      <BackgroundGradient containerClassName="w-full" className={`rounded-full ${scrolled?"bg-black bg-opacity-0":null} transition duration-700`}>
         <div className="flex items-center justify-around space-x-8">
       <div>    
         <Image src={Logo} alt="logo" width={85} height={85} className="bg-blend-darken"/>
@@ -109,7 +109,7 @@ function Navbar({ className }: { className?: string }) {
         </MenuItem>
       </Menu>
       <div className="flex space-x-5 text-white"> 
-        <Button variant="outline">Login</Button>
+        <Button variant="outline"><Link href='/log-in'>Log in</Link></Button>
         <Button variant="secondary"><Link href='/sign-up'>Sign Up</Link></Button>
       </div> 
       </div>

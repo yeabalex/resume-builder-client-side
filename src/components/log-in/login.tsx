@@ -14,20 +14,15 @@ import { Label } from "@/components/ui/label"
 import {
   Tabs,
   TabsContent,
-  TabsList,
-  TabsTrigger,
 } from "@/components/ui/tabs"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"
-import { sendData } from "./sign-up-api"
 import {Spinner} from 'react-bootstrap'
+import { loginUser } from "./login-api"
 import { useRouter } from "next/navigation"
 
-
-const validateFirstName = (value: any) => /^[A-Za-z\s]+$/.test(value) ? '' : "First name can't be empty";
-const validateLastName = (value: any) => /^[A-Za-z\s]+$/.test(value) ? '' : "Last name can't be empty";
 const validateEmail = (value: any) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? '' : 'Invalid email address';
 const validatePassword = (value: any) => {
   if (!value) return "Password can't be empty";
@@ -39,12 +34,13 @@ const validatePassword = (value: any) => {
 };
 
 
-export function SignUp() {
+
+export function LogIn() {
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '' });
-  const [errors, setErrors] = useState({ firstName: '', lastName: '', email: '', password: '' });
-  const [newErrors, setNewErrors] = useState({firstName: '', lastName: '', email: '', password: ''})
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState({ email: '', password: '' });
+  const [newErrors, setNewErrors] = useState({ email: '', password: ''})
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
@@ -74,8 +70,6 @@ export function SignUp() {
 
   useEffect(()=>{
     setNewErrors( {
-        firstName: validateFirstName(formData.firstName),
-        lastName: validateLastName(formData.lastName),
         email: validateEmail(formData.email),
         password: validatePassword(formData.password),
       })
@@ -88,12 +82,12 @@ export function SignUp() {
     if (Object.values(newErrors).every(error => error === '')) {
        setLoading(true)
        try{
-        sendData(formData)
-        router.push('/log-in')
+        loginUser(formData)
        }catch(err){
         console.error(err)
        }finally{
         setLoading(false)
+        router.push('/dashboard')
        }
     } else {
       setErrors(newErrors);
@@ -106,32 +100,12 @@ export function SignUp() {
         <TabsContent value="account">
           <Card>
             <CardHeader>
-              <CardTitle className="text-white">Create an account</CardTitle>
+              <CardTitle className="text-white">Log in to your account</CardTitle>
               <CardDescription className="text-white">
-                Already have an account? <Link href='/log-in' className="text-blue-400">Click here to log in</Link>
+                Forgot password? <Link href='/log-in' className="text-blue-400">Click here to reset your password</Link>
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
-              <div className="space-y-1">
-                <Label htmlFor="firstName" className="text-white">First Name</Label>
-                <Input
-                  id="firstName"
-                  placeholder="Martin"
-                  className={`bg-white ${errors.firstName ? 'border-red-500' : ''}`}
-                  onChange={handleChange}
-                />
-                {errors.firstName && <div className="text-red-500">{errors.firstName}</div>}
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="lastName" className="text-white">Last Name</Label>
-                <Input
-                  id="lastName"
-                  placeholder="Garrix"
-                  className={`bg-white ${errors.lastName ? 'border-red-500' : ''}`}
-                  onChange={handleChange}
-                />
-                {errors.lastName && <div className="text-red-500">{errors.lastName}</div>}
-              </div>
               <div className="space-y-1">
                 <Label htmlFor="email" className="text-white">Email Address</Label>
                 <Input
@@ -166,7 +140,7 @@ export function SignUp() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button variant="outline" className="text-white w-32" type="submit">{loading?<Spinner animation="border" size="sm" className="text-white"/>:"Register"}</Button>
+              <Button variant="outline" className="text-white w-32" type="submit">{loading?<Spinner animation="border" size="sm" className="text-white"/>:"Log in"}</Button>
             </CardFooter>
           </Card>
         </TabsContent>
