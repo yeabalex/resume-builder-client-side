@@ -21,7 +21,8 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"
-
+import { sendData } from "./sign-up-api"
+import {Spinner} from 'react-bootstrap'
 
 
 const validateFirstName = (value: any) => /^[A-Za-z\s]+$/.test(value) ? '' : "First name can't be empty";
@@ -30,9 +31,12 @@ const validateEmail = (value: any) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ?
 const validatePassword = (value: any) => {
   if (!value) return "Password can't be empty";
   if (value.length < 8) return 'Password must be at least 8 characters long';
-  if (!/\d/.test(value) || !/[!@#$%^&*(),.?":{}|<>]/.test(value)) return 'Password must contain at least one number and one special symbol';
+  if (!/\d/.test(value)) return 'Password must contain at least one number';
+  if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) return 'Password must contain at least one special symbol';
+  if (!/[A-Z]/.test(value)) return 'Password must contain at least one uppercase letter';
   return '';
 };
+
 
 export function SignUp() {
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
@@ -40,6 +44,7 @@ export function SignUp() {
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '' });
   const [errors, setErrors] = useState({ firstName: '', lastName: '', email: '', password: '' });
   const [newErrors, setNewErrors] = useState({firstName: '', lastName: '', email: '', password: ''})
+  //const [loading, setLoading]
 
   useEffect(() => {
     const handleResize = () => {
@@ -80,7 +85,7 @@ export function SignUp() {
 
 
     if (Object.values(newErrors).every(error => error === '')) {
-      
+        sendData(formData);
     } else {
       setErrors(newErrors);
     }
@@ -135,6 +140,7 @@ export function SignUp() {
                   className="w-0 h-0 absolute top-[40px] right-2 z-50"
                   onClick={togglePassword}
                   variant="secondary"
+                  type="button"
                 >
                   {!showPassword ?
                     <FontAwesomeIcon icon={faEye} style={{ color: "#000" }} className="" /> :

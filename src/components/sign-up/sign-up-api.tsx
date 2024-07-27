@@ -1,11 +1,10 @@
-'use client'
-import { useEffect } from "react"
-import axios from 'axios'
+import axios from 'axios';
 
-export const sendData = (data: any) =>{
-    try{
-        const sentData = axios.post('')
-    }catch(err){
-        console.error(err)
-    }
-}
+export const sendData = async (data: any) => {
+  try {
+    const sentData = await axios.post('http://localhost:3001/api/auth/signup', data);
+    console.log(sentData.data); 
+  } catch (err) {
+    console.error(err);
+  }
+};
