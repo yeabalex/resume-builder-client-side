@@ -16,7 +16,7 @@ export default function ThankYou() {
     React.useEffect(() => {
         async function getUserData() {
             try {
-                const response = await axios.get('http://localhost:3001/api/auth/login/status', {withCredentials: true});
+                const response = await axios.get('https://kraft-server.onrender.com/api/auth/login/status', {withCredentials: true});
                 
                 if (response.status === 401) {
                     router.push('/log-in');
