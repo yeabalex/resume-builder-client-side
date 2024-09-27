@@ -1,15 +1,14 @@
 import { useState } from "react";
+import { useAppContext } from "@/context";
 
-let image = "";
 export function ImageUploadForm() {
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const { image, setImage } = useAppContext();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const preview = URL.createObjectURL(file);
-      setImagePreview(preview);
-      image = preview;
+      setImage(preview);
     }
   };
 
@@ -17,9 +16,9 @@ export function ImageUploadForm() {
     <div className="flex flex-col items-center space-y-2">
       {/* Image Preview Circle */}
       <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-gray-300">
-        {imagePreview ? (
+        {image ? (
           <img
-            src={imagePreview}
+            src={image}
             alt="Profile"
             className="w-full h-full object-cover"
           />
@@ -56,7 +55,7 @@ export function ImageUploadForm() {
       />
       <button
         onClick={() => {
-          setImagePreview(null);
+          setImage("");
         }}
         className="text-sm text-red-600"
         type="button"
@@ -66,5 +65,3 @@ export function ImageUploadForm() {
     </div>
   );
 }
-
-export default image;

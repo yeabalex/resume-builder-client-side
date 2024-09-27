@@ -1,12 +1,14 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { cn } from "@/lib/utils";
 import { ImageUploadForm } from "./image-upload";
-import image from "./image-upload";
 import { Textarea } from "@nextui-org/input";
+import { useAppContext } from "@/context";
+import { sendPersonalInfo } from "./api/personal-info-api";
+import { getPersonalInfo } from "./api/personal-info-api";
 
-interface UserData {
+export interface UserData {
   firstName: string;
   lastName: string;
   dateOfBirth: string;
@@ -39,6 +41,20 @@ export default function PersonalInfo() {
     image: "",
   });
 
+  const { image, setImage } = useAppContext();
+  data.image = image;
+
+  useEffect(() => {
+    async function fetchUserInfo() {
+      if (await getPersonalInfo()) {
+        const userData: UserData = await getPersonalInfo();
+        setImage(userData.image);
+        setData((prev) => ({ ...prev, ...userData }));
+      }
+    }
+    fetchUserInfo();
+  }, []);
+
   return (
     <form
       className="my-8"
@@ -57,6 +73,7 @@ export default function PersonalInfo() {
             placeholder="Tyler"
             type="text"
             required
+            value={data.firstName}
             onChange={(e) =>
               setData((prev) => ({ ...prev, firstName: e.target.value }))
             }
@@ -70,6 +87,7 @@ export default function PersonalInfo() {
             placeholder="Durden"
             type="text"
             required
+            value={data.lastName}
             onChange={(e) =>
               setData((prev) => ({ ...prev, lastName: e.target.value }))
             }
@@ -82,6 +100,11 @@ export default function PersonalInfo() {
           <Input
             id="date"
             type="date"
+            value={
+              data.dateOfBirth
+                ? new Date(data.dateOfBirth).toISOString().split("T")[0]
+                : ""
+            }
             onChange={(e) =>
               setData((prev) => ({ ...prev, dateOfBirth: e.target.value }))
             }
@@ -94,6 +117,7 @@ export default function PersonalInfo() {
             id="email"
             placeholder="projectmayhem@fc.com"
             type="email"
+            value={data.email}
             onChange={(e) =>
               setData((prev) => ({ ...prev, email: e.target.value }))
             }
@@ -105,6 +129,7 @@ export default function PersonalInfo() {
             id="phone"
             placeholder="+12345678"
             type="text"
+            value={data.phoneNumber}
             onChange={(e) =>
               setData((prev) => ({ ...prev, phoneNumber: e.target.value }))
             }
@@ -119,6 +144,7 @@ export default function PersonalInfo() {
             id="linkedin"
             placeholder="Handle"
             type="text"
+            value={data.linkedin}
             onChange={(e) =>
               setData((prev) => ({ ...prev, linkedin: e.target.value }))
             }
@@ -131,6 +157,7 @@ export default function PersonalInfo() {
             id="website"
             placeholder="www.abc.com"
             type="text"
+            value={data.website}
             onChange={(e) =>
               setData((prev) => ({ ...prev, website: e.target.value }))
             }
@@ -145,6 +172,7 @@ export default function PersonalInfo() {
             id="address1"
             placeholder="32 XYZ Street"
             type="text"
+            value={data.addressLine1}
             onChange={(e) =>
               setData((prev) => ({ ...prev, addressLine1: e.target.value }))
             }
@@ -157,6 +185,7 @@ export default function PersonalInfo() {
             id="city"
             placeholder="Addis"
             type="text"
+            value={data.city}
             onChange={(e) =>
               setData((prev) => ({ ...prev, city: e.target.value }))
             }
@@ -169,6 +198,7 @@ export default function PersonalInfo() {
             id="country"
             placeholder="Kosovo"
             type="text"
+            value={data.country}
             onChange={(e) =>
               setData((prev) => ({ ...prev, country: e.target.value }))
             }
@@ -182,6 +212,10 @@ export default function PersonalInfo() {
           label="About me"
           placeholder=""
           className="max-w-5xl bg-white text-sm font-medium"
+          value={data.aboutMe}
+          onChange={(e) => {
+            setData((prev) => ({ ...prev, aboutMe: e.target.value }));
+          }}
         />
       </div>
 
@@ -199,9 +233,9 @@ function handleSubmit(e: { preventDefault: () => void }, data: UserData) {
   e.preventDefault();
 
   try {
-    data.image = image;
-    console.log(image);
+    //data.image = image;
     console.log(data);
+    sendPersonalInfo(data);
   } catch (err) {}
 }
 export const LabelInputContainer = ({
