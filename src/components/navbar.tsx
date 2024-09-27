@@ -67,13 +67,13 @@ function Navbar({ className }: { className?: string }) {
       <div
       className={cn("fixed mx-[10%] top-2 inset-x-0 z-50 flex justify-around items-center rounded-full", className)}
     >
-      <BackgroundGradient containerClassName="w-full" className={`rounded-full ${scrolled?"bg-black bg-opacity-0":null} transition duration-700`}>
-        <div className="flex items-center justify-around space-x-8">
+      <div className={`rounded-full ${scrolled?"bg-black bg-opacity-0":null} transition duration-700`}>
+        <div className="flex items-center justify-around space-x-16">
       <div>    
         <Image src={Logo} alt="logo" width={85} height={85} className="bg-blend-darken"/>
       </div>
       <Menu setActive={setActive}>
-        <div className="text-white"><Link href='/'>Home</Link></div>
+        <div className="text-neutral-700 dark:text-neutral-200"><Link href='/'>Home</Link></div>
         <MenuItem setActive={setActive} active={active} item="About">
           <div className="flex flex-col space-y-4 text-sm">
             <HoveredLink href="/web-dev">What we do</HoveredLink>
@@ -109,11 +109,10 @@ function Navbar({ className }: { className?: string }) {
         </MenuItem>
       </Menu>
       <div className="flex space-x-5 text-white"> 
-        <Button variant="outline"><Link href='/log-in'>Log in</Link></Button>
-        <Button variant="secondary"><Link href='/sign-up'>Sign Up</Link></Button>
+        <Button className="bg-neutral-800"><Link href='/log-in'>Log in</Link></Button>
       </div> 
       </div>
-      </BackgroundGradient>
+      </div>
     </div>
       )
     }else{
@@ -121,9 +120,9 @@ function Navbar({ className }: { className?: string }) {
       <div
         className={cn("fixed top-2 inset-x-0 max-w-[90%] mx-auto z-50 flex justify-around items-center rounded-full", className)}
       >
-      <BackgroundGradient containerClassName="w-full rounded-full" className={`${scrolled?"bg-black bg-opacity-80":null} transition duration-700`}>
+      <div className={`${scrolled?"bg-black bg-opacity-80":null} transition duration-700 w-full flex justify-between`}>
           <NavbarMobile image={Logo}/>
-      </BackgroundGradient>
+      </div>
       </div>
       )
     }

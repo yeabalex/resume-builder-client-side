@@ -35,14 +35,17 @@ const validatePassword = (value: any) => {
 
 
 
-export function LogIn() {
+export default function LogIn() {
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({ email: '', password: '' });
   const [newErrors, setNewErrors] = useState({ email: '', password: ''})
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [clicked, setClicked] = useState(false)
   const router = useRouter()
+
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -75,30 +78,46 @@ export function LogIn() {
       })
   },[formData])
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  useEffect(()=>{
+   async function submitData(){
+      
+      if(clicked){
+        await loginUser(formData);
+        router.push('/dashboard')
+      }
+    }
+
+    submitData()
+  },[clicked])
+
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
     
     if (Object.values(newErrors).every(error => error === '')) {
-       setLoading(true)
-       try{
-        loginUser(formData)
-       }catch(err){
-        console.error(err)
-       }finally{
-        setLoading(false)
-        router.push('/dashboard')
-       }
+      return 
     } else {
       setErrors(newErrors);
     }
   };
 
+  useEffect(()=>{
+    function toogleLoading(){
+    if (clicked){
+      setLoading(true)
+    }else{
+      setLoading(false)
+    }
+  }
+
+  toogleLoading()
+  },[clicked])
+
   return (
-    <form onSubmit={handleSubmit} className={`w-full h-[100vh] flex justify-center items-center px-8 ${!isSmallScreen ? "pt-16" : ""}`}>
+    <form onSubmit={handleSubmit} className={`bg-neutral-800 w-full h-[100vh] flex justify-center items-center px-8 ${!isSmallScreen ? "pt-16" : ""}`}>
       <Tabs defaultValue="account" className="w-[400px]">
         <TabsContent value="account">
-          <Card>
+          <Card className="bg-neutral-800">
             <CardHeader>
               <CardTitle className="text-white">Log in to your account</CardTitle>
               <CardDescription className="text-white">
@@ -140,7 +159,7 @@ export function LogIn() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button variant="outline" className="text-white w-32" type="submit">{loading?<Spinner animation="border" size="sm" className="text-white"/>:"Log in"}</Button>
+              <Button variant="outline" className="bg-gray-100 text-neutral-700 w-32" type="submit" onClick={()=>{setClicked(prev=>!prev)}}>{loading?"Loading...":"Log in"}</Button>
             </CardFooter>
           </Card>
         </TabsContent>

@@ -46,6 +46,7 @@ export function SignUp() {
   const [errors, setErrors] = useState({ firstName: '', lastName: '', email: '', password: '' });
   const [newErrors, setNewErrors] = useState({firstName: '', lastName: '', email: '', password: ''})
   const [loading, setLoading] = useState(false)
+  const [clicked, setClicked] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -100,11 +101,23 @@ export function SignUp() {
     }
   };
 
+  useEffect(()=>{
+    function toogleLoading(){
+    if (clicked){
+      setLoading(true)
+    }else{
+      setLoading(false)
+    }
+  }
+
+  toogleLoading()
+  },[clicked])
+
   return (
-    <form onSubmit={handleSubmit} className={`w-full h-[100vh] flex justify-center items-center px-8 ${!isSmallScreen ? "pt-16" : ""}`}>
+    <form onSubmit={handleSubmit} className={`bg-neutral-800 w-full h-[100vh] flex justify-center items-center px-8 ${!isSmallScreen ? "pt-16" : ""}`}>
       <Tabs defaultValue="account" className="w-[400px]">
         <TabsContent value="account">
-          <Card>
+          <Card className="bg-neutral-800">
             <CardHeader>
               <CardTitle className="text-white">Create an account</CardTitle>
               <CardDescription className="text-white">
@@ -166,7 +179,7 @@ export function SignUp() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button variant="outline" className="text-white w-32" type="submit">{loading?<Spinner animation="border" size="sm" className="text-white"/>:"Register"}</Button>
+              <Button variant="outline" className="w-32 bg-gray-100" type="submit" onClick={()=>{setClicked(prev=>!prev)}}>{loading?"Loading...":"Register"}</Button>
             </CardFooter>
           </Card>
         </TabsContent>

@@ -1,7 +1,7 @@
-import ThankYou from "@/components/temporary/thank-you";
+import { SidebarDemo } from "@/components/dashboard/dashboard-layout";
 
 export default function Dashboard(){
     return (
-        <ThankYou/>
+        <SidebarDemo/>
     )
 }

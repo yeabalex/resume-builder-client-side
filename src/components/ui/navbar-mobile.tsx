@@ -18,25 +18,22 @@ const NavbarMobile = (params : Params) => {
           <Image src={params.image} alt='' width={85} height={85}/>
         <div className="lg:hidden">
           <button onClick={toggleMenu}>
-            <FontAwesomeIcon icon={isOpen ? faTimes : faBars} className="text-white text-2xl" />
+            <FontAwesomeIcon icon={isOpen ? faTimes : faBars} className="text-neutral-700 dark:text-neutral-200 text-2xl" />
           </button>
         </div>
       </div>
       <div className={`lg:flex ${isOpen ? 'block' : 'hidden'} mt-4 lg:mt-0 flex flex-col space-y-5`}>
-        <a href="/" className="block px-2 py-1 text-white lg:inline-block lg:mt-0">
+        <a href="/" className="block px-2 py-1 text-neutral-700 dark:text-neutral-200 lg:inline-block lg:mt-0">
         Home
         </a>
-        <a href="/about" className="block px-2 py-1 text-white lg:inline-block lg:mt-0">
+        <a href="/about" className="block px-2 py-1 text-neutral-700 dark:text-neutral-200 lg:inline-block lg:mt-0">
         About
         </a>
-        <a href="/settings" className="block px-2 py-1 text-white lg:inline-block lg:mt-0">
+        <a href="/settings" className="block px-2 py-1 text-neutral-700 dark:text-neutral-200 lg:inline-block lg:mt-0">
         Services
         </a>
         <div className='flex space-x-5'>
-        <Button variant="outline" className='text-white' >Log in</Button>
-    
-        <Button variant="secondary"><Link href='/sign-up' >Sign up</Link></Button>
-        
+        <Button className='dark:bg-neutral-800' >Log in</Button>
         </div>
       </div>
     </nav>

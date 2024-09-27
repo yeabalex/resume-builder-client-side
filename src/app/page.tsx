@@ -10,8 +10,6 @@ export default function HeroParallaxDemo() {
 <>  
   <NavbarDemo/>
   <HeroParallax />
-  <StickyScrollRevealDemo/>
-  <Footer/>
 </>
 );
 }
