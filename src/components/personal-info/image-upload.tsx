@@ -1,24 +1,35 @@
 import { useState } from "react";
 import { useAppContext } from "@/context";
+import { deleteImageFromBucket } from "@/firebase/bucket";
 
-export function ImageUploadForm() {
+let preview: string;
+export function ImageUploadForm({ userId }: { userId: string }, { isSaveClicked }: { isSaveClicked: boolean }) {
   const { image, setImage } = useAppContext();
-
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const preview = URL.createObjectURL(file);
-      setImage(preview);
+      preview = URL.createObjectURL(file);
+      setImage(file);
     }
+  };
+
+  const handleDelete = async () => {
+    if (image && image.length > 0) {
+      try {
+        await deleteImageFromBucket(userId);
+      } catch (error) {
+        console.error("Error deleting image:", error);
+      }
+    }
+    setImage("");
   };
 
   return (
     <div className="flex flex-col items-center space-y-2">
-      {/* Image Preview Circle */}
       <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-gray-300">
         {image ? (
           <img
-            src={image}
+            src={image.length>0?image:preview}
             alt="Profile"
             className="w-full h-full object-cover"
           />
@@ -35,7 +46,6 @@ export function ImageUploadForm() {
         )}
       </div>
 
-      {/* Edit Button */}
       <label
         htmlFor="imageUpload"
         className="cursor-pointer flex items-center text-blue-500 hover:text-blue-700"
@@ -45,7 +55,7 @@ export function ImageUploadForm() {
         </svg>
         Edit
       </label>
-      {/* Hidden File Input */}
+
       <input
         type="file"
         id="imageUpload"
@@ -54,9 +64,7 @@ export function ImageUploadForm() {
         onChange={handleImageChange}
       />
       <button
-        onClick={() => {
-          setImage("");
-        }}
+        onClick={handleDelete}
         className="text-sm text-red-600"
         type="button"
       >

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { IconPlus } from "@tabler/icons-react";
 import Link from "next/link";
-import { getUserCv } from "./dashboard-api";
+import { getUserCv } from "../../api/dashboard-api";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";

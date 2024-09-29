@@ -2,17 +2,15 @@
 
 import React, { createContext, useState, useContext, ReactNode } from "react";
 
-// Define a specific type for the context value
 interface AppContextType {
-  image: string;
-  setImage: (image: string) => void;
+  image: any;
+  setImage: (image: any) => void;
 }
 
-// Create the context with a default value
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppWrapper({ children }: { children: ReactNode }) {
-  const [image, setImage] = useState<string>("");
+  const [image, setImage] = useState<any>(false);
 
   return (
     <AppContext.Provider value={{ image, setImage }}>

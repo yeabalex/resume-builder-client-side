@@ -8,36 +8,32 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import {Dashboard} from "@/components/dashboard/dashboard";
+import { Dashboard } from "@/components/dashboard/dashboard";
 import { usePathname } from "next/navigation";
+import { getUserData } from "../../api/dashboard-api";
 
 export function SidebarDemo() {
+  interface UserData {
+    firstName: any;
+  }
+  const [userData, setUserData] = React.useState<UserData>();
+  const router = useRouter();
+  const path = usePathname();
 
-    interface UserData {
-        firstName: any
-    }
-    const [userData, setUserData] = React.useState<UserData>();
-    const router = useRouter();
-    const path = usePathname()
-
-    React.useEffect(() => {
-        async function getUserData() {
-            try {
-                const response = await axios.get('http://localhost:3001/api/auth/login/status', {withCredentials: true});
-                
-                if (response.status === 401) {
-                    router.push('/log-in');
-                } else if (response.status === 200) {
-                    setUserData(response.data);
-                }
-            } catch (err) {
-                console.error('Error fetching user data:', err);
-                router.push('/log-in');
-            }
+  React.useEffect(() => {
+    async function getData() {
+      try {
+        const res = await getUserData();
+        if (res?.status === 200) {
+          setUserData(res.data);
+        } else {
+          router.push("/log-in");
         }
+      } catch (err) {}
+    }
 
-        getUserData();
-    }, [router]);
+    getData();
+  }, [router]);
 
   const [open, setOpen] = React.useState(false);
   const links = getLinks();
@@ -73,13 +69,13 @@ export function SidebarDemo() {
                     height={50}
                     alt="Avatar"
                   />
-                )
+                ),
               }}
             />
           </div>
         </SidebarBody>
       </Sidebar>
-      <Dashboard/>
+      <Dashboard />
     </div>
   );
 }
