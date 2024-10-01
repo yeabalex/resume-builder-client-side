@@ -21,7 +21,7 @@ export const Header = () => {
   return (
     <div className="max-w-full w-full relative mx-auto py-20 md:py-5 left-0 top-0 flex flex-col justify-evenly items-center space-y-8">
       <p className="text-base md:text-base text-neutral-700 dark:text-neutral-200 max-w-3xl text-center">
-        With no hassle on your part, our app lets you build beautiful resumes with the most attractive designs and templates. Say goodbye to manual editing - just input your information and let us handle the rest. This app is made by <a href="#" className="text-blue-500 hover:underline">Yeabsira A.</a>, founder at <a href="#" className="text-blue-500 hover:underline">Kraft Technologies</a>, a company known for developing innovative SaaS products. Our team's expertise in creating cutting-edge software solutions ensures that you'll have access to the best tools for crafting your perfect resume.
+        With no hassle on your part, our app lets you build beautiful resumes with the most attractive designs and templates. Say goodbye to manual editing - just input your information and let us handle the rest. This app is made by <a href="#" className="text-blue-500 hover:underline">Yeabsira A.</a>, founder at <a href="#" className="text-blue-500 hover:underline">Kraft Technologies</a>, a company known for developing innovative SaaS products. Our team&apos;s expertise in creating cutting-edge software solutions ensures that you&apos;ll have access to the best tools for crafting your perfect resume.
       </p>
 
       <MovingBorderDemo/>

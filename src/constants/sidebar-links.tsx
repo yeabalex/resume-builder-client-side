@@ -21,8 +21,6 @@ import LanguageSkill from "@/components/language-skill/language-skill";
 import Certificate from "@/components/certification/certification";
 import Volunteer from "@/components/volunteer/volunteer";
 
-
-
 export const labels = [
   { label: "Personal Info", icon: IconUserBolt, tsx: <PersonalInfo/> },
   { label: "Work Experience", icon: IconBriefcase, tsx: <WorkExperience/> },
@@ -35,7 +33,8 @@ export const labels = [
   { label: "Volunteer", icon: IconGiftCard, tsx: <Volunteer/> },
 ];
 
-const getLinks = () => {
+
+export const useLinks = () => {
   const path = usePathname();
 
   return labels.map(({ label, icon: Icon }) => ({
@@ -47,4 +46,4 @@ const getLinks = () => {
   }));
 };
 
-export default getLinks;
+export default useLinks;

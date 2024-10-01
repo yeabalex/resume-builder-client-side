@@ -11,6 +11,7 @@ import axios from "axios";
 import { Dashboard } from "@/components/dashboard/dashboard";
 import { usePathname } from "next/navigation";
 import { getUserData } from "../../api/dashboard-api";
+import { Suspense } from "react";
 
 export function SidebarDemo() {
   interface UserData {
@@ -75,7 +76,9 @@ export function SidebarDemo() {
           </div>
         </SidebarBody>
       </Sidebar>
-      <Dashboard />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Dashboard />
+      </Suspense>
     </div>
   );
 }
