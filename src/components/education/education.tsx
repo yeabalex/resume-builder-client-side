@@ -114,7 +114,7 @@ export default function Education() {
         <p className="text-sm text-gray-600">Add your educational background to showcase your academic achievements</p>
       </div>
       {educations.length === 0 ? (
-        <div className="flex h-screen items-center justify-center">
+        <div className="flex items-center justify-center">
           <Button type="button" onClick={addEducationEntry} className="">
             + Add Education
           </Button>

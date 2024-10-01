@@ -120,7 +120,7 @@ React.useEffect(() => {
         <p className="text-sm text-gray-600">Add your professional experience to showcase your career journey</p>
       </div>
       {experiences.length === 0 ? (
-        <div className="flex h-screen items-center justify-center">
+        <div className="flex items-center justify-center">
           <Button type="button" onClick={addExperience} className="">
             + Add Work Experience
           </Button>
