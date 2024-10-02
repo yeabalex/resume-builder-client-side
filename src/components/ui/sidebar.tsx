@@ -4,9 +4,9 @@ import Link, { LinkProps } from "next/link";
 import React, { useState, createContext, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { IconMenu2, IconX } from "@tabler/icons-react";
-import { Button } from "./button";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
-
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import LogoKraft from "@/../public/kraft-logo.png"
+import Image from "next/image";
 interface Links {
   label: string;
   href: string;
@@ -113,15 +113,32 @@ export const MobileSidebar = ({
   ...props
 }: React.ComponentProps<"div">) => {
   const { open, setOpen } = useSidebar();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleLinkClick = (href: string) => {
+    setOpen(false);
+    const url = new URL(href, window.location.origin);
+    const searchParams = new URLSearchParams(url.search);
+    const sParam = searchParams.get('s');
+    if (sParam) {
+      router.push(`${pathname}?s=${sParam}`);
+    }
+  };
+
   return (
     <>
       <div
         className={cn(
-          "h-10 px-4 py-4 flex flex-row md:hidden  items-center justify-between bg-neutral-100 dark:bg-neutral-800 w-full"
+          "h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-neutral-100 dark:bg-neutral-800 w-full"
         )}
         {...props}
       >
-        <div className="flex justify-end z-20 w-full">
+        <div className="flex justify-between z-20 w-full">
+       
+        <Image src={LogoKraft} alt="Logo Kraft" width={30} height={30} />
+
+      
           <IconMenu2
             className="text-neutral-800 dark:text-neutral-200"
             onClick={() => setOpen(!open)}
@@ -144,11 +161,21 @@ export const MobileSidebar = ({
             >
               <div
                 className="absolute right-10 top-10 z-50 text-neutral-800 dark:text-neutral-200"
-                onClick={() => setOpen(!open)}
+                onClick={() => setOpen(false)}
               >
                 <IconX />
               </div>
-              {children}
+              {React.Children.map(children, child => {
+                if (React.isValidElement(child) && 'link' in child.props) {
+                  return React.cloneElement(child, {
+                    onClick: (e: React.MouseEvent) => {
+                      e.preventDefault();
+                      handleLinkClick(child.props.link.href);
+                    }
+                  } as React.HTMLAttributes<HTMLAnchorElement>);
+                }
+                return child;
+              })}
             </motion.div>
           )}
         </AnimatePresence>
@@ -167,11 +194,15 @@ export const SidebarLink = ({
   props?: LinkProps;
 }) => {
   const { open, animate } = useSidebar();
+  const searchParams = useSearchParams();
+  const currentSection = searchParams.get('s');
+  const isActive = currentSection === link.label.replaceAll(" ", "").toLowerCase();
 
   return (
     <Link      
     className={cn(
-      "flex items-center justify-start gap-2  group/sidebar py-2",
+      "flex items-center justify-start gap-2 group/sidebar py-2",
+      isActive ? "bg-neutral-200 dark:bg-neutral-700 rounded-md" : "",
       className
     )}
     href={link.href}
@@ -183,7 +214,10 @@ export const SidebarLink = ({
           display: animate ? (open ? "inline-block" : "none") : "inline-block",
           opacity: animate ? (open ? 1 : 0) : 1,
         }}
-        className="text-neutral-700 dark:text-neutral-200 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
+        className={cn(
+          "text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0",
+          isActive ? "text-neutral-900 dark:text-neutral-100 font-semibold" : "text-neutral-700 dark:text-neutral-200"
+        )}
       >
         {link.label}
       </motion.span>

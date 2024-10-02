@@ -12,6 +12,8 @@ import { Dashboard } from "@/components/dashboard/dashboard";
 import { usePathname } from "next/navigation";
 import { getUserData } from "../../api/dashboard-api";
 import { Suspense } from "react";
+import LogoKraft from "@/../public/kraft-logo.png"
+import { useAppContext } from "@/context";
 
 export function SidebarDemo() {
   interface UserData {
@@ -38,6 +40,10 @@ export function SidebarDemo() {
 
   const [open, setOpen] = React.useState(false);
   const links = getLinks();
+  const image = useAppContext();
+  if (!userData) {
+    return <div>Loading...</div>;
+  } else {
   return (
     <div
       className={cn(
@@ -62,14 +68,24 @@ export function SidebarDemo() {
               link={{
                 label: `${userData?.firstName}`,
                 href: "#",
-                icon: (
+                icon: image.image ? (
                   <Image
-                    src="https://assets.aceternity.com/manu.png"
+                    src={image.image}
                     className="h-7 w-7 flex-shrink-0 rounded-full"
                     width={50}
                     height={50}
                     alt="Avatar"
                   />
+                ) : (
+                  <div className="w-7 h-7 bg-gray-300 flex items-center justify-center rounded-full">
+                    <svg
+                      className="w-4 h-4 text-gray-500"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+                    </svg>
+                  </div>
                 ),
               }}
             />
@@ -82,13 +98,14 @@ export function SidebarDemo() {
     </div>
   );
 }
+}
 export const Logo = () => {
   return (
     <Link
       href="#"
       className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
     >
-      <div className="h-5 w-6 bg-black dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
+     <Image src={LogoKraft} alt="Logo Kraft" width={30} height={30} />
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

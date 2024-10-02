@@ -11,7 +11,7 @@ export const ButtonSave = ({
   return (
     <Button
       type="submit"
-      className="bg-neutral-800 w-24 text-white rounded-md h-10 ml-5 flex items-center justify-center"
+      className="bg-indigo-600 hover:bg-indigo-700 w-24 text-white rounded-md h-10 ml-5 flex items-center justify-center"
       disabled={isSaving || isLoading}
     >
       {isSaving ? (
