@@ -14,7 +14,7 @@ export async function getImageData(url: string){
     const blob = new Blob([binImageData],{type: "image/jpeg"});
 
     const imageUrl = URL.createObjectURL(blob);
-    console.log(imageUrl, "from bucket");
+    //console.log(imageUrl, "from bucket");
     return imageUrl;
 }
 
