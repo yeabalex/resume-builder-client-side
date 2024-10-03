@@ -15,7 +15,7 @@ export async function getUserCv() {
 export async function getUserData() {
   try {
     const response = await axios.get(
-      "http://localhost:3001/api/auth/login/status",
+      `${apiUrl}/api/auth/login/status`,
       { withCredentials: true }
     );
     return response;
