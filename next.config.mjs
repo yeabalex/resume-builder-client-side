@@ -5,5 +5,15 @@ const nextConfig = {
     },
   };
   
+  module.exports = {
+    async rewrites() {
+      return [
+        {
+          source: '/api/:path*',
+          destination: 'https://kraft-server.onrender.com/:path*',
+        },
+      ];
+    },
+  };
   export default nextConfig;
   

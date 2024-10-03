@@ -7,7 +7,7 @@ export const loginUser = async (credentials: any) => {
     const loggedData = await axios.post(
       `${apiUrl}/api/auth/login`,
       credentials,
-      { withCredentials: true }
+      { withCredentials: true, }
     );
     console.log(loggedData.data, "here");
     return loggedData;
