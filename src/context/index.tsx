@@ -22,7 +22,6 @@ export function AppWrapper({ children }: { children: ReactNode }) {
 export function useAppContext() {
   const context = useContext(AppContext);
 
-  // Ensure context is not undefined
   if (context === undefined) {
     throw new Error("useAppContext must be used within an AppWrapper");
   }
