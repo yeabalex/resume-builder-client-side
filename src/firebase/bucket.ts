@@ -47,7 +47,7 @@ export async function deleteImageFromBucket(userId: string): Promise<void> {
 				console.log("Profile image not found for user:", userId);
 			}
 		}
-		throw error; // Re-throw the error for the caller to handle
+		throw error;
 	}
 }
 
