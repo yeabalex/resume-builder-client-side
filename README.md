@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Full Stack Resume Builder
 
-## Getting Started
+This is a comprehensive full-stack resume builder application built using modern web technologies and cloud services. The application allows users to perform CRUD (Create, Read, Update, Delete) operations on professional resumes with ease. Users can create new resumes, view existing ones, update their content, and delete outdated versions, providing full control over their resume management process.
 
-First, run the development server:
+## Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Frontend**: Next.js
+- **Backend**: Node.js
+- **Database**: PostgreSQL
+- **Cloud Services**: (AWS, Google Cloud)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- User-friendly interface for creating and editing resumes
+- Real-time preview of resume changes
+- Secure user authentication and data storage
+- Cloud-based storage for easy access across devices
+- Export options, including PDF and various document formats
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Future Features
 
-## Learn More
+I am constantly working to improve and expand the capabilities of the Resume Builder. Here are some exciting features I plan to add in the future:
 
-To learn more about Next.js, take a look at the following resources:
+- Multiple resume templates to choose from, allowing users to select the design that best suits their professional style and industry
+- AI-powered content suggestions to help users optimize their resumes
+- Integration with professional networking platforms for easy import of work history and skills
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Database
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+It utilizes PostgreSQL as its primary database system. Here are some key points about the database implementation:
 
-## Deploy on Vercel
+- We use PostgreSQL to efficiently store and manage user data, resume content, and template information.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- The database is designed with scalability in mind, capable of handling a growing number of users and resumes.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Implemented an ORM (Object-Relational Mapping) to interact with our database, specifically using Prisma.
+
+
