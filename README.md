@@ -29,7 +29,7 @@ I am constantly working to improve and expand the capabilities of the Resume Bui
 
 It utilizes PostgreSQL as its primary database system. Here are some key points about the database implementation:
 
-- We use PostgreSQL to efficiently store and manage user data, resume content, and template information.
+- I use PostgreSQL to efficiently store and manage user data, resume content, and template information.
 
 - The database is designed with scalability in mind, capable of handling a growing number of users and resumes.
 
