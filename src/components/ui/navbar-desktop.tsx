@@ -73,7 +73,6 @@ export const Menu = ({
       className="relative rounded-full boder border-transparent dark:bg-black dark:border-white/[0.2] shadow-input flex justify-center space-x-16 px-8 py-6 "
     >
       {children}
-
     </nav>
   );
 };

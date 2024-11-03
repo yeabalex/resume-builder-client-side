@@ -1,11 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { HoveredLink, Menu, MenuItem, ProductItem } from "@/components/ui/navbar-desktop";
+import {
+  HoveredLink,
+  Menu,
+  MenuItem,
+  ProductItem,
+} from "@/components/ui/navbar-desktop";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { BackgroundGradient } from "./ui/background-gradient";
 import NavbarMobile from "./ui/navbar-mobile";
-import Logo from '@/../public/kraft-logo.png'
+import Logo from "@/../public/kraft-logo.png";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -30,9 +35,9 @@ function Navbar({ className }: { className?: string }) {
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -41,16 +46,20 @@ function Navbar({ className }: { className?: string }) {
       setScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   if (isSmallScreen) {
     return (
       <div className={cn("fixed top-0 inset-x-0 z-50", className)}>
-        <div className={`w-full transition-all duration-300 ${scrolled ? "bg-black bg-opacity-80 py-2" : "py-4"}`}>
+        <div
+          className={`w-full transition-all duration-300 ${
+            scrolled ? "bg-black bg-opacity-80 py-2" : "py-4"
+          }`}
+        >
           <NavbarMobile image={Logo} />
         </div>
       </div>
@@ -58,19 +67,33 @@ function Navbar({ className }: { className?: string }) {
   }
 
   return (
-    <nav className={cn("fixed top-0 inset-x-0 z-50 transition-all duration-300 max-w-4xl mx-auto", className)}>
-      <div className={`mx-auto px-6 ${scrolled ? "bg-black bg-opacity-80 py-2" : "py-4"}`}>
+    <nav
+      className={cn(
+        "fixed top-0 inset-x-0 z-50 transition-all duration-300 max-w-4xl mx-auto",
+        className
+      )}
+    >
+      <div className={`mx-auto px-6 ${scrolled ? "py-2" : "py-4"}`}>
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
             <Image src={Logo} alt="logo" width={50} height={50} className="" />
-            <span className="text-xl font-bold text-black">Kraft</span>
           </Link>
           <Menu setActive={setActive}>
             <MenuItem setActive={setActive} active={active} item="Home">
-              <Link href="/" className="text-white hover:text-gray-300 transition">Home</Link>
+              <Link
+                href="/"
+                className="text-white hover:text-gray-300 transition"
+              >
+                Home
+              </Link>
             </MenuItem>
             <MenuItem setActive={setActive} active={active} item="About">
-              <Link href="/web-dev" className="text-white hover:text-gray-300 transition">What we do</Link>
+              <Link
+                href="/web-dev"
+                className="text-white hover:text-gray-300 transition"
+              >
+                What we do
+              </Link>
             </MenuItem>
             <MenuItem setActive={setActive} active={active} item="Services">
               <div className="grid grid-cols-2 gap-4 p-4">

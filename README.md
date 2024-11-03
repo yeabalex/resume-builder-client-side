@@ -34,5 +34,3 @@ It utilizes PostgreSQL as its primary database system. Here are some key points 
 - The database is designed with scalability in mind, capable of handling a growing number of users and resumes.
 
 - Implemented an ORM (Object-Relational Mapping) to interact with our database, specifically using Prisma.
-
-
