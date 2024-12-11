@@ -106,12 +106,12 @@ export const Header = () => {
   return (
     <div className="max-w-7xl relative mx-auto px-4 w-full  left-0 top-0 z-50">
       <h1 className="text-2xl md:text-7xl font-bold dark:text-white">
-        The Ultimate <br /> Resume Builder
+        The AI Powered <br /> Resume Builder
       </h1>
       <p className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200 mb-8">
-        With no hassle on your part, our app lets you build beautiful resumes
-        with the most attractive designs and templates. Say goodbye to manual
-        editing - just input your information and let the app handle the rest.
+        With no hassle on your part, build beautiful resumes with the help of AI
+        tailored to the job description. Say goodbye to manual
+        editing - just input your information and let the AI handle the rest.
       </p>
       <a
         href="./sign-up"
